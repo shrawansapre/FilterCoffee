@@ -1,0 +1,23 @@
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.coffee-fill {
+  fill: brown;
+  animation: fill 3s infinite ease-in-out;
+}
+
+@keyframes fill {
+  0% {
+    d: path('M 50 60 Q 80 70 80 60 T 50 60');
+  }
+  50% {
+    d: path('M 50 30 Q 80 40 80 30 T 50 30');
+  }
+  100% {
+    d: path('M 50 60 Q 80 70 80 60 T 50 60');
+  }
+}

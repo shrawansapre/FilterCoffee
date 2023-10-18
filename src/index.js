@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { ThemeProvider } from "@mui/material/styles";
+import { CoffeeShopProvider } from "./context/CoffeeShopContext";
+import theme from './theme';
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // To prevent re-render
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CoffeeShopProvider>
+        <App />
+      </CoffeeShopProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
