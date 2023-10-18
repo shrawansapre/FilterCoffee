@@ -33,20 +33,20 @@ const SearchBar = ({ onPlaceSelected }) => {
   return (
     <Downshift
       onChange={(selection) => {
-        console.log("Selected Item:", selection);
-        console.log(
-          "Latitude:",
-          selection.center[1],
-          "Longitude:",
-          selection.center[0]
-        );
+        // console.log("Selected Item:", selection);
+        // console.log(
+        //   "Latitude:",
+        //   selection.center[1],
+        //   "Longitude:",
+        //   selection.center[0]
+        // );
         onPlaceSelected(selection.center);
         updateUserLocation({
           latitude: selection.center[1],
           longitude: selection.center[0],
         });
       }}
-      itemToString={(item) => (item ? item.place_name : "")}
+      itemToString={item => (item ? item.place_name : "")}
     >
       {({
         getRootProps,
@@ -57,7 +57,7 @@ const SearchBar = ({ onPlaceSelected }) => {
         isOpen,
         selectedItem,
       }) => (
-        <div {...getRootProps}>
+        <div {...getRootProps({}, {suppressRefError: true})}>
           <Paper
             sx={{
               display: "flex",
