@@ -1,45 +1,29 @@
 import React, { useState, useMemo, useContext, useEffect } from "react";
-import Map, {
-  Marker,
-  NavigationControl,
-  FullscreenControl,
-} from "react-map-gl";
+import Map, { Marker, NavigationControl, FullscreenControl} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import CustomMarker from "./customMarker";
+import {Grid} from "@mui/material";
 
-import { CoffeeShopContext } from "../context/CoffeeShopContext";
+import CustomMarker from "./customMarker";
 import LoadingAnimation from "./loadingAnimation";
 import ShopPopup from "./ShopPopup";
 
+import { CoffeeShopContext } from "../context/CoffeeShopContext";
+
+
 const MapboxMap = () => {
-  // const [userLocation, setUserLocation] = useState(null);
   const { coffeeShops, loading, userLocation } = useContext(CoffeeShopContext);
   const [selectedShop, setSelectedShop] = useState(null);
-  console.log("in component");
-  console.log(userLocation);
-
   const [viewport, setViewport] = useState({
     latitude: userLocation.latitude,
     longitude: userLocation.longitude,
     zoom: 14,
   });
 
-  useEffect(() => {
-    if (userLocation) {
-      console.log("user loc changed")
-      setViewport((prev) => ({
-        ...prev,
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-      }));
-    }
-  }, [userLocation]);
-
   const customMarkers = useMemo(
     () =>
       coffeeShops.map((shop, index) => (
         <Marker
-          key={`marker-${index}`}
+         key={`marker-${index}`}
           latitude={shop.lat}
           longitude={shop.lng}
           anchor="bottom"
@@ -56,112 +40,46 @@ const MapboxMap = () => {
     [coffeeShops]
   );
 
+  console.log("rendering Mapbox Map");
+
+  useEffect(() => {
+    if (userLocation) {
+      console.log("user loc changed", userLocation)
+      setViewport((prev) => ({
+        ...prev,
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+      }));
+    }
+  }, [userLocation]);
+
   return (
-    <>
+    <Grid container direction="column" spacing={2} alignItems="center" sx={{ minHeight: '100vh', marginTop:"20px" }}>
+      <Grid item xs={12}>
       {userLocation ? (
         <>
           {loading ? (
             <LoadingAnimation />
           ) : (
-            <Map
-              initialViewState={viewport}
-              style={{ width: "80vw", height: "60vh" }}
-              mapStyle="mapbox://styles/mapbox/streets-v10"
-              mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-            >
+            <Map initialViewState={viewport} style={{ width: "80vw", height: "60vh" }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
               <FullscreenControl position="top-left" />
               <NavigationControl position="top-left" />
 
               {/* User Marker */}
-              <Marker
-                longitude={userLocation.longitude}
-                latitude={userLocation.latitude}
-              />
+              <Marker longitude={userLocation.longitude} latitude={userLocation.latitude}/>
               {/* Shop Markers */}
               {customMarkers}
               {/* Shop Popups */}
-              {selectedShop && (
-                <ShopPopup
-                  selectedShop={selectedShop}
-                  onClose={() => setSelectedShop(false)}
-                />
-              )}
+              {selectedShop && <ShopPopup selectedShop={selectedShop} onClose={() => setSelectedShop(false)}/>}
             </Map>
           )}
         </>
       ) : (
         <LoadingAnimation />
       )}
-    </>
+     </Grid>
+   </Grid>
   );
 };
 
 export default MapboxMap;
-
-// const [viewport, setViewport] = useState({});
-// useEffect(() => {
-//   navigator.geolocation.getCurrentPosition((pos) => {
-//     setViewport({
-//       ...viewport,
-//       latitude: pos.coords.latitude,
-//       longitude: pos.coords.longitude,
-//       zoom: 14,
-//     });
-//     console.log("in component");
-//     updateUserLocation({ latitude:pos.coords.latitude, longitude: pos.coords.longitude})
-//   });
-
-// }, []);
-
-// const handleGeolocation = (position) => {
-//   const { latitude, longitude } = position.coords;
-//   console.log(latitude, longitude)
-//   updateUserLocation({ latitude, longitude });
-// };
-
-// import { convertToGeoJSON } from '../utils/geoUtils';
-
-// These are just example layers. You can define their styles as you see fit.
-// const clusterLayer = {
-//   id: 'clusters',
-//   type: 'circle',
-//   filter: ['has', 'point_count'],
-//   /* other styling options */
-// };
-
-// const clusterCountLayer = {
-//   id: 'cluster-count',
-//   type: 'symbol',
-//   filter: ['has', 'point_count'],
-//   /* other styling options */
-// };
-
-// const unclusteredPointLayer = {
-//   id: 'unclustered-point',
-//   type: 'circle',
-//   filter: ['!', ['has', 'point_count']],
-//   /* other styling options */
-// };
-
-// {
-//   /* <Source
-//           id="myData"
-//           type="geojson"
-//           data={geoJSONData}
-//           cluster={true}
-//           clusterMaxZoom={12} // Max zoom to cluster points on
-//           clusterRadius={50} // Radius of each cluster when clustering points (defaults to 50)
-//         >
-//             { !showMarkers &&
-//             <>
-//           <Layer source="myData" {...clusterLayer} />
-//           <Layer source ="myData" {...clusterCountLayer} />
-//           <Layer source ="myData" {...unclusteredPointLayer} />
-//           </>
-//         }
-//         </Source> */
-// }
-
-// {
-//   /* { showMarkers &&  */
-// }

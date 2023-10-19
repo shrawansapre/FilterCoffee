@@ -13,7 +13,7 @@ code {
 }
 
 .mapboxgl-popup-content {
-  border-radius: 12px;
+  border-radius: 12px !important;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
@@ -21,14 +21,17 @@ code {
 .popup-header img {
   width: 100%;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .popup-content {
-  padding: 16px;
+  padding: 10px;
+  /* border-radius: 12px; */
 }
 
 .popup-footer {
   background-color: #f4f4f4;
   padding: 8px;
   text-align: center;
+  border-radius: 12px;
 }

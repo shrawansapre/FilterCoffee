@@ -16,6 +16,7 @@ import LoadingAnimation from "./loadingAnimation";
 
 const ListCards = () => {
   const { coffeeShops, loading } = useContext(CoffeeShopContext);
+  console.log("rendering List");
 
   return (
     <div style={{marginTop:'20px'}}>
@@ -60,9 +61,9 @@ const ListCards = () => {
             <IconButton aria-label="add to favorites">
               <StarIcon />
             </IconButton>
-            <IconButton aria-label="place">
+            {/* <IconButton aria-label="place">
               <PlaceIcon />
-            </IconButton>
+            </IconButton> */}
             <Button
               variant="contained"
               size="small"
