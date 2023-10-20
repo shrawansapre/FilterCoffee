@@ -20,7 +20,7 @@ const ContactForm = () => {
     e.preventDefault();
     // Here, you would typically send the data to your server or a third-party service
     // For this example, we'll simply log it to the console
-    console.log('Form data submitted:', formData);
+    // console.log('Form data submitted:', formData);
     // Clear the form
     setFormData({
       name: '',

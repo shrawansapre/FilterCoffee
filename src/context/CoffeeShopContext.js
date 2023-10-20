@@ -27,7 +27,7 @@ export const CoffeeShopProvider = ({ children }) => {
       setLoading(true)
       try {
         if (userLocation) {
-          console.log(userLocation)
+          // console.log(userLocation)
           const url = `${baseURL}places?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}`;
           const response = await axios.get(url);
           setCoffeeShops(response.data);

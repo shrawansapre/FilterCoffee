@@ -44,7 +44,7 @@ const MapboxMap = () => {
 
   useEffect(() => {
     if (userLocation) {
-      console.log("user loc changed", userLocation)
+      console.log("user loc changed")
       setViewport((prev) => ({
         ...prev,
         latitude: userLocation.latitude,
