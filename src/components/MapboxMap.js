@@ -16,7 +16,7 @@ const MapboxMap = () => {
   const [viewport, setViewport] = useState({
     latitude: userLocation.latitude,
     longitude: userLocation.longitude,
-    zoom: 14,
+    zoom: 15,
   });
 
   const customMarkers = useMemo(

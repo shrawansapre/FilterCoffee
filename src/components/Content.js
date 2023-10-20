@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Tab, Tabs, AppBar, Typography, Box } from "@mui/material";
+import { Tab, Tabs, AppBar, Typography, Box, Grid } from "@mui/material";
 
 import MapboxMap from "./MapboxMap";
 import ListCards from './listCards';
@@ -57,10 +57,16 @@ const Content = () => {
     return (
     <> 
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: isSearchActivated ? 'auto' : 'calc(100vh - 64px)', transition: 'top 1s ease-in-out', position: 'relative'}}>
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-            <Typography variant="body1" sx={{ marginRight: '10px', color: '#8B4513' }}>Enable your location or</Typography>
-            <SearchBar onPlaceSelected={handlePlaceSelected}/>
-        </div>
+        {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}> */}
+        <Grid container justifyContent="center" sx={{textAlign:"center"}}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Typography variant="body1" sx={{ color: '#8B4513',  fontSize: {xs: '0.75rem',sm: '0.875rem',md: '1rem'}}}>Enable your location or</Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <SearchBar onPlaceSelected={handlePlaceSelected}/>
+                </Grid>
+            </Grid>
+        {/* </div> */}
         {/* {userLocMessage &&
         <div>
             <Typography variant="body1" sx={{ marginTop: '20px', marginRight: '10px', color: '#8B4513' }}>{userLocMessage}</Typography>
