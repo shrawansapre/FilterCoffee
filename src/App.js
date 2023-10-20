@@ -10,7 +10,7 @@ function App() {
       <Typography variant="h3" align="center"
         sx={{
           fontFamily: "'Pacifico', cursive",
-          marginTop: theme.spacing(2), // 16px
+          margin: theme.spacing(2), // 16px
           [theme.breakpoints.up("md")]: {
             marginTop: theme.spacing(4), // 32px
           },
