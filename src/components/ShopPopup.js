@@ -11,10 +11,10 @@ const PopupImage = styled.img`
 
 
 const ShopPopup = ({ selectedShop, onClose }) => (
-    <Popup latitude={selectedShop.lat} longitude={selectedShop.lng} onClose={onClose} tipSize={1} anchor="top">
-   <div className="popup-header">
-        <PopupImage src={selectedShop.thumbnail} alt={selectedShop.name}/>
-        <Typography variant="h6" style={{ margin: '0 10px' }}>{selectedShop.name}</Typography>
+  <Popup latitude={selectedShop.lat} longitude={selectedShop.lng} onClose={onClose} tipSize={1}>
+    <div className="popup-header">
+      <PopupImage src={selectedShop.thumbnail} alt={selectedShop.name}/>
+      <Typography variant="h6" style={{ margin: '0 10px' }}>{selectedShop.name}</Typography>
     </div>
     <div className="popup-content" style={{ padding: '10px' }}>
         <Typography variant="body2">
@@ -34,7 +34,7 @@ const ShopPopup = ({ selectedShop, onClose }) => (
       </Link>
     </Button>
     </div>
-    </Popup>
+  </Popup>
 );
 
 export default ShopPopup;
