@@ -39,7 +39,7 @@ const SearchBar = ({ onPlaceSelected }) => {
       {({getRootProps, getInputProps, getItemProps, getMenuProps, highlightedIndex, isOpen, selectedItem}) => (
 
         <div {...getRootProps({}, {suppressRefError: true})}>
-          <Paper sx={{ display: "flex", alignItems: "center", width: 300, margin: "0 auto", borderRadius: "12px", position: "relative"}}>
+          <Paper sx={{ display: "flex", alignItems: "center", width: { xs: '100%', sm:375, md: 375 }, margin: { xs: '0 auto', md: '0 auto' }, borderRadius: "12px", position: "relative"}}>
             <TextField 
               {...getInputProps({
                 onChange: (e) => {
@@ -58,7 +58,7 @@ const SearchBar = ({ onPlaceSelected }) => {
                   </InputAdornment>
               )}}
             />
-            <Paper {...getMenuProps()} sx={{ position: "absolute", top: "100%", left: 0, width: "auto", minWidth: "100%", zIndex: 1, overflow: "hidden"}}>
+            <Paper {...getMenuProps()} sx={{ position: "absolute", top: "100%", left: 0, maxWidth: "auto", minWidth: "100%", zIndex: 1, overflow: "hidden"}}>
               {isOpen
                 ? places.map((place, index) => (
                     <MenuItem {...getItemProps({ item: place })} key={place.id} selected={highlightedIndex === index} component="div">
