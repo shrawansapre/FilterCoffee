@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useContext, useEffect } from "react";
 import Map, { Marker, NavigationControl, FullscreenControl} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import {Grid} from "@mui/material";
 
 import CustomMarker from "./customMarker";
 import LoadingAnimation from "./loadingAnimation";
@@ -34,7 +33,7 @@ const MapboxMap = () => {
             setSelectedShop(shop);
           }}
         >
-          <CustomMarker />
+          <CustomMarker details={shop} />
         </Marker>
       )),
     [coffeeShops]
@@ -54,14 +53,13 @@ const MapboxMap = () => {
   }, [userLocation]);
 
   return (
-    <Grid container direction="column" spacing={2} alignItems="center" sx={{ minHeight: '100vh', marginTop:"20px" }}>
-      <Grid item xs={12}>
+    <div  style={{ paddingTop: "20px"}}>
       {userLocation ? (
         <>
           {loading ? (
-            <LoadingAnimation />
+            <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation />: </div>
           ) : (
-            <Map initialViewState={viewport} style={{ width: "80vw", height: "60vh" }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
+            <Map initialViewState={viewport} style={{ width: "100%", height: "60vh" }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
               <FullscreenControl position="top-left" />
               <NavigationControl position="top-left" />
 
@@ -77,8 +75,8 @@ const MapboxMap = () => {
       ) : (
         <LoadingAnimation />
       )}
-     </Grid>
-   </Grid>
+    
+   </div>
   );
 };
 
