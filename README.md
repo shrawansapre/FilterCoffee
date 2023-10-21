@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Coffee Filter
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1be0d2b8-94ed-408c-8532-6b14759006db/deploy-status)](https://app.netlify.com/sites/storied-bavarois-7f5a29/deploys)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
