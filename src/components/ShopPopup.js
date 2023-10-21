@@ -10,7 +10,9 @@ const PopupImage = styled.img`
 `;
 
 
-const ShopPopup = ({ selectedShop, onClose }) => (
+const ShopPopup = ({ selectedShop, onClose }) => {
+  // console.log(selectedShop.open_now)
+  return(
   <Popup latitude={selectedShop.lat} longitude={selectedShop.lng} onClose={onClose} tipSize={1}>
     <div className="popup-header">
       <PopupImage src={selectedShop.thumbnail} alt={selectedShop.name}/>
@@ -18,23 +20,24 @@ const ShopPopup = ({ selectedShop, onClose }) => (
     </div>
     <div className="popup-content" style={{ padding: '10px' }}>
         <Typography variant="body2">
-          <span className="icon-rating"></span> Rating: {selectedShop.rating}
+          Rating: {selectedShop.rating}
         </Typography>
         <Typography variant="body2">
-          <span className="icon-clock"></span> Open Now: {selectedShop.openingHours}
+           Open Now: {selectedShop.open_now ? 'Yes' : 'No'}
         </Typography>
         <Typography variant="body2">
-          <span className="icon-location"></span> Address: {selectedShop.address}
+          Address: {selectedShop.address}
         </Typography>
     </div>
     <div style={{ textAlign: 'center' }}>
     <Button variant="contained" size="small" sx={{backgroundColor: "#f4a261",color: "#ffffff",}}>
-      <Link href={selectedShop.gMapsLink} color="inherit" underline="none" target="_blank" rel="noopener noreferrer" aria-label="Visit shop">
+      <Link href={selectedShop.google_maps_url} color="inherit" underline="none" target="_blank" rel="noopener noreferrer" aria-label="Visit shop">
         Visit
       </Link>
     </Button>
     </div>
   </Popup>
-);
+)
+  };
 
 export default ShopPopup;
