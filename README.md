@@ -27,7 +27,7 @@ git clone https://github.com/shrawansapre/FilterCoffee.git
 Navigate to the project folder:
 
 ```bash
-cd coffee-shop-locator
+cd FilterCoffee/
 ```
 
 Install dependencies:
