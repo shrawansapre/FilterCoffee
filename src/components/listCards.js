@@ -10,6 +10,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
 import Rating from '@mui/material/Rating';
 import LanguageIcon from '@mui/icons-material/Language'
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 
 import coffeePlaceholder from "../assets/coffee_thumbnail_placeholder.svg";
@@ -35,7 +36,7 @@ const ListCards = () => {
                 <Typography gutterBottom variant="h5" component="div">{shop.name}</Typography>
                 {/* Open/Close */}
                 <div style={{ border: '1px solid', borderColor: shop.open_now ? 'green' : 'red', color: shop.open_now ? 'green' : 'red', borderRadius: '4px', padding: '2px 8px',fontWeight: 'bold',fontSize: '0.8em'}}>
-                  {shop.open_now ? 'Open' : 'Close'}
+                  {shop.open_now ? 'Open' : 'Closed'}
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -46,14 +47,17 @@ const ListCards = () => {
               :  <Typography variant="body2" color="text.secondary" style={{ marginLeft: '5px' }}>Rating not available</Typography>}
               </div>
               {/* Website */}
-              {shop.website && (
-                <div style={{ marginTop: '6px', display: 'flex', alignItems: 'center',  }}>
-                <Link href={shop.website} color="text.secondary" underline="none" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', marginRight: '8px' }}>
-                  <LanguageIcon fontSize="small" sx={{marginRight:"5px"}}/>
-                  <Typography variant="body2" color="text.secondary">{shop.website}</Typography>
-                </Link>
-              </div>
-              )}           
+              <div style={{ marginTop: '6px', display: 'flex', alignItems: 'center',  }}>
+                {shop.website ? (
+                  <Link href={shop.website} color="text.secondary" underline="none" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', marginRight: '8px' }}>
+                    <LanguageIcon fontSize="small" sx={{marginRight:"5px"}}/>
+                    <Typography variant="body2" color="text.secondary">Website</Typography>
+                    {/* <OpenInNewIcon fontSize="small"/> */}
+                  </Link>
+                ):
+                <Typography variant="body2" color="text.secondary">Website not available</Typography>
+                }
+              </div>         
             </CardContent>
             <CardActions disableSpacing sx={{ justifyContent: "space-between", padding: "0 24px 16px",'& button': {'&:hover': {backgroundColor: '#f4a261'}}}}>
               <IconButton aria-label="add to favorites">
