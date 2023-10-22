@@ -1,6 +1,6 @@
 # Coffee Filter
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1be0d2b8-94ed-408c-8532-6b14759006db/deploy-status)](https://app.netlify.com/sites/storied-bavarois-7f5a29/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7f35a57a-72d0-48ee-8644-00c63d9ffc1e/deploy-status)](https://app.netlify.com/sites/lighthearted-shortbread-50c921/deploys)
 
 React-based application that helps find coffee shops nearby. It leverages Mapbox for mapping services and provides an interactive UI for a superior user experience.
 
