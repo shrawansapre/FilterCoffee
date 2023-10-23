@@ -39,7 +39,7 @@ const SearchBar = ({ onPlaceSelected }) => {
       {({getRootProps, getInputProps, getItemProps, getMenuProps, highlightedIndex, isOpen, selectedItem}) => (
 
         <div {...getRootProps({}, {suppressRefError: true})}>
-          <Paper sx={{ display: "flex", alignItems: "center", width: { xs: '100%', sm:375, md: 375 }, margin: { xs: '0 auto', md: '0 auto' }, borderRadius: "12px", position: "relative"}}>
+          <Paper sx={{ display: "flex", alignItems: "center", width: { xs: '100%', sm:375, md: 375 }, margin: { xs: '0 auto', md: '0 auto' }, borderRadius: "20px", position: "relative"}}>
             <TextField 
               {...getInputProps({
                 onChange: (e) => {
@@ -48,7 +48,16 @@ const SearchBar = ({ onPlaceSelected }) => {
                 },
                 placeholder: "Enter Zip Code",
               })}
-              sx={{flex: 1, "& input::placeholder": {color: "#8B4513"}, borderRadius: "12px"}}
+              sx={{
+                flex: 1, 
+                "& input::placeholder": {color: "#8B4513"}, 
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "20px",
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8B4513',
+                  }
+                }
+              }}
               InputProps={{ 
                 endAdornment: (
                   <InputAdornment position="end">
