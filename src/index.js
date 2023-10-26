@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { CoffeeShopProvider } from "./context/CoffeeShopContext";
 import theme from './theme';
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CoffeeShopProvider>
+      <Router>
         <App />
+        </Router>
       </CoffeeShopProvider>
     </ThemeProvider>
   </React.StrictMode>
