@@ -67,7 +67,7 @@ const Content = () => {
              <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                 <img src="/favicon-32x32.png" alt="Coffee Brewing" style={{width: '200px'}} />
                 </div>}
-                <Grid container justifyContent="center" alignItems="center" spacing={isSearchActivated? 2: 0} style={{ marginTop: '20px', paddingLeft:isSearchActivated?"10px":0, paddingRight:isSearchActivated?'10px':0}}>
+                <Grid container justifyContent="center" alignItems="center" spacing={isSearchActivated? 2: 0} style={{ marginTop: '20px', paddingLeft:isSearchActivated?"5px":0, paddingRight:isSearchActivated?'5px':0}}>
                 
                 <Grid item>
 

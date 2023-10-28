@@ -48,14 +48,14 @@ const SearchBar = ({ onPlaceSelected }) => {
                   setInputValue(e.target.value);
                   fetchPlaces(e.target.value);
                 },
-                placeholder: "Enter Zip Code",
+                placeholder: "Enter Address",
               })}
               sx={{
                 flex: 1,
                 '& input': {
                     fontSize: {
-                      xs: '0.8em',
-                      md: '1em'
+                      xs: '1em',
+                      md: '1.2em'
                 }},
                 "& input::placeholder": {color: "#8B4513"}, 
                 "& .MuiOutlinedInput-root": {
