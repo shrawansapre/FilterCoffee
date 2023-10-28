@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import debounce from 'lodash.debounce';
+
 
 import {TextField, Paper, IconButton, InputAdornment, MenuItem} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,7 +14,7 @@ const SearchBar = ({ onPlaceSelected }) => {
   const { updateUserLocation } = useContext(CoffeeShopContext);
   const [places, setPlaces] = useState([]);
 
-  const fetchPlaces = async (query) => {
+  const fetchPlaces = debounce(async (query) => {
 
     // TODO: Move the API call to back-end server
     // const response = await fetch(`http://localhost:3001/geocode?query=${query}`);
@@ -23,7 +25,7 @@ const SearchBar = ({ onPlaceSelected }) => {
     setPlaces(response.data.features)
     console.log("rendering Search");
     
-  };
+  }, 300);
 
   return (
     <Downshift
@@ -39,17 +41,22 @@ const SearchBar = ({ onPlaceSelected }) => {
       {({getRootProps, getInputProps, getItemProps, getMenuProps, highlightedIndex, isOpen, selectedItem}) => (
 
         <div {...getRootProps({}, {suppressRefError: true})}>
-          <Paper sx={{ display: "flex", alignItems: "center", width: { xs: '100%', sm:375, md: 375 }, margin: { xs: '0 auto', md: '0 auto' }, borderRadius: "20px", position: "relative"}}>
+          <Paper sx={{ display: "flex", alignItems: "center", maxWidth: {xs:375, sm:375, md: 375 }, margin: { xs: '0 auto', md: '0 auto' }, borderRadius: "20px", position: "relative"}}>
             <TextField 
               {...getInputProps({
                 onChange: (e) => {
                   setInputValue(e.target.value);
                   fetchPlaces(e.target.value);
                 },
-                placeholder: "Enter Zip Code",
+                placeholder: "Enter Address",
               })}
               sx={{
-                flex: 1, 
+                flex: 1,
+                '& input': {
+                    fontSize: {
+                      xs: '1em',
+                      md: '1.2em'
+                }},
                 "& input::placeholder": {color: "#8B4513"}, 
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "20px",
@@ -60,8 +67,8 @@ const SearchBar = ({ onPlaceSelected }) => {
               }}
               InputProps={{ 
                 endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton aria-label="search" sx={{color: "#6B4F2E"}}>
+                  <InputAdornment position="end" >
+                    <IconButton aria-label="search" sx={{color: "#6B4F2E",  fontSize: {xs: 'small', sm: 'medium', md: 'large'} }} size="small">
                       <SearchIcon />
                     </IconButton>
                   </InputAdornment>
@@ -70,7 +77,10 @@ const SearchBar = ({ onPlaceSelected }) => {
             <Paper {...getMenuProps()} sx={{ position: "absolute", top: "100%", left: 0, maxWidth: "auto", minWidth: "100%", zIndex: 1, overflow: "hidden"}}>
               {isOpen
                 ? places.map((place, index) => (
-                    <MenuItem {...getItemProps({ item: place })} key={place.id} selected={highlightedIndex === index} component="div">
+                    <MenuItem {...getItemProps({ item: place })} key={place.id} selected={highlightedIndex === index} component="div" sx={{fontSize: {
+                      xs: '0.8em',  // Smaller font-size for smaller screens
+                      md: '1em'   // Normal font-size for medium and larger screens
+                    }}}>
                       {place.place_name}
                     </MenuItem>
                   ))
