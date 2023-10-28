@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Typography, Grid, Link } from "@mui/material";
 import Card from "@mui/material/Card";
@@ -21,19 +21,35 @@ import { CoffeeShopContext } from "../context/CoffeeShopContext";
 const ListCards = () => {
   const { coffeeShops, loading } = useContext(CoffeeShopContext);
   console.log("rendering List");
+  const [showFull, setShowFull] = useState(false);
+
+  const toggleShowFull = () => {
+    setShowFull(!showFull);
+  };
+
+  const truncatedStyle = {
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 1,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxHeight: '1.5em',
+    cursor: 'pointer'
+  };
 
   return (
   <div >
     {loading ? <LoadingAnimation/> : (
     <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" alignItems="center" style={{ padding: "30px"}}>
       {coffeeShops.map((shop, index) => (
-        <Grid item xs={12} sm={6} md={4} lg={4} key={index} >
-          <Card key={index} sx={{maxWidth:'400px', maxHeight: '500px', margin: 'auto', borderRadius: "16px", boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)"}}>
-            <CardMedia component="img" alt={shop.name} height="200" image={shop.thumbnail || coffeePlaceholder} sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px", objectFit: shop.thumbnail ? "none":"contain"}}/>
+        <Grid item xs={12} sm={6} md={4} lg={4} key={shop.id} >
+          <Card key={index} sx={{maxWidth:'400px', maxHeight: '500px', margin: 'auto', borderRadius: "20px", boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)"}}>
+            <CardMedia component="img" loading="lazy" alt={shop.name} height="200" image={shop.thumbnail || coffeePlaceholder} sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px", objectFit: shop.thumbnail ? "none":"contain"}}/>
             <CardContent sx={{ padding: ["8px 16px", "16px 24px"] }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 {/* Name of shop */}
-                <Typography gutterBottom variant="h5" component="div">{shop.name}</Typography>
+                <Typography gutterBottom variant="h5" component="div"  style={showFull ? {} : truncatedStyle} 
+      onClick={toggleShowFull}>{shop.name}</Typography>
                 {/* Open/Close */}
                 <div style={{ border: '1px solid', borderColor: shop.open_now ? 'green' : 'red', color: shop.open_now ? 'green' : 'red', borderRadius: '4px', padding: '2px 8px',fontWeight: 'bold',fontSize: '0.8em'}}>
                   {shop.open_now ? 'Open' : 'Closed'}

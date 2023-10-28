@@ -5,8 +5,8 @@ import { Popup } from "react-map-gl";
 import styled from "@emotion/styled";
 
 const PopupImage = styled.img`
-  maxWidth: 150px;
-  Height: 150px;
+  maxWidth: 100px;
+  Height: 100px;
 `;
 
 
@@ -18,7 +18,7 @@ const ShopPopup = ({ selectedShop, onClose }) => {
       <PopupImage src={selectedShop.thumbnail} alt={selectedShop.name}/>
       <Typography variant="h6" style={{ margin: '0 10px' }}>{selectedShop.name}</Typography>
     </div>
-    <div className="popup-content" style={{ padding: '10px' }}>
+    <div className="popup-content" style={{ padding: '5px' }}>
         <Typography variant="body2">
           Rating: {selectedShop.rating}
         </Typography>
