@@ -73,7 +73,7 @@ const MapboxMap = () => {
           )}
         </>
       ) : (
-        <LoadingAnimation />
+        <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
       )}
     
    </div>
