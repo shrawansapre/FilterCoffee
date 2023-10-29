@@ -10,8 +10,6 @@ import StarIcon from "@mui/icons-material/Star";
 import Button from "@mui/material/Button";
 import Rating from '@mui/material/Rating';
 import LanguageIcon from '@mui/icons-material/Language'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-
 
 import coffeePlaceholder from "../assets/coffee_thumbnail_placeholder.svg";
 import LoadingAnimation from "./loadingAnimation";
@@ -39,7 +37,8 @@ const ListCards = () => {
 
   return (
   <div >
-    {loading ? <LoadingAnimation/> : (
+    {loading ? <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
+    : (
     <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" alignItems="center" style={{ padding: "30px"}}>
       {coffeeShops.map((shop, index) => (
         <Grid item xs={12} sm={6} md={4} lg={4} key={shop.id} >
