@@ -8,6 +8,7 @@ export const CoffeeShopProvider = ({ children }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [coffeeShops, setCoffeeShops] = useState([testCoffeeShopData]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const baseURL = process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:3001/";
 
   const updateUserLocation = (newLocation) => {
@@ -31,13 +32,16 @@ export const CoffeeShopProvider = ({ children }) => {
           const url = `${baseURL}places?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}`;
           const response = await axios.get(url);
           setCoffeeShops(response.data);
-        }
-        else{
-          setCoffeeShops(testCoffeeShopData);
-        }
+          setErrorMessage(null);  // Reset error state after successful fetch
           setLoading(false);
+        }
+        // else{
+        //   setCoffeeShops(testCoffeeShopData);
+        // }
+        //   setLoading(false);
         } catch (error) {
           console.error(error);
+          setErrorMessage(error.message);
           setLoading(false);
         }
     };
@@ -49,7 +53,8 @@ export const CoffeeShopProvider = ({ children }) => {
     coffeeShops,
     loading,
     userLocation,
-    updateUserLocation
+    updateUserLocation,
+    errorMessage
   };
 
   return <CoffeeShopContext.Provider value={value}>{children}</CoffeeShopContext.Provider>;
