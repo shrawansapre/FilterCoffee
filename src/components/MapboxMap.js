@@ -53,13 +53,13 @@ const MapboxMap = () => {
   }, [userLocation]);
 
   return (
-    <div  style={{ paddingTop: "20px"}}>
+    <div  style={{ width: "100%", height: "100%"}}>
       {userLocation ? (
         <>
           {loading ? (
             <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
           ) : (
-            <Map initialViewState={viewport} style={{ width: "100%", height: "60vh" }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
+            <Map initialViewState={viewport} style={{ width: "100%", height: "100%"  }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
               <FullscreenControl position="top-left" />
               <NavigationControl position="top-left" />
 

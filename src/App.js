@@ -6,7 +6,7 @@ import Content from "./components/Content";
 function App() {
   console.log("rendering App");
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Typography variant="h3" align="center"
         sx={{
           fontFamily: "'Pacifico', cursive",
@@ -19,7 +19,7 @@ function App() {
           }}}>
         Coffee Shops in the Neighborhood
       </Typography>
-      <Content />
+      <Content style={{ flex: '1 1 auto', overflow: 'hidden' }}/>
     </div>
   );
 }
