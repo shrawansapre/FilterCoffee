@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import { Typography, Grid, Link } from "@mui/material";
 import Card from "@mui/material/Card";
@@ -16,10 +16,17 @@ import LoadingAnimation from "./loadingAnimation";
 
 import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
-const ListCards = () => {
+
+
+const ListCards = ({cardRefs, activeCardId, resetActiveCard}) => {
   const { coffeeShops, loading } = useContext(CoffeeShopContext);
   console.log("rendering List");
   const [showFull, setShowFull] = useState(false);
+  const activeCardStyle = {
+    transform: 'scale(1.05)',
+    transition: 'transform 0.3s ease',
+    boxShadow: '0px 0px 20px 5px #f4a261' 
+  };
 
   const toggleShowFull = () => {
     setShowFull(!showFull);
@@ -35,14 +42,26 @@ const ListCards = () => {
     cursor: 'pointer'
   };
 
+  useEffect(() => {
+    console.log(activeCardId)
+    if (activeCardId !== null) {
+      const timer = setTimeout(() => {
+        resetActiveCard();
+        // You could emit an event or call a callback function here to reset the activeCardId in the parent.
+      }, 1000); // Reset after 1 second
+  
+      return () => clearTimeout(timer); // Clear the timer if the component is unmounted or if activeCardId changes before the timer completes.
+    }
+  }, [activeCardId, resetActiveCard]);
+
   return (
   <div >
     {loading ? <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
     : (
     <Grid container spacing={{ xs: 2, md: 2, lg:3 }} style={{ padding: "30px"}}>
-      {coffeeShops.map((shop, index) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={shop.id} >
-          <Card key={index} sx={{maxWidth:'400px', maxHeight: '500px', margin: 'auto', borderRadius: "20px", boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)"}}>
+      {coffeeShops && coffeeShops.map((shop, index) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={shop.id} ref={el => cardRefs.current[shop.id] = el} >
+          <Card key={index} sx={{maxWidth:'400px', maxHeight: '500px', margin: 'auto', borderRadius: "20px", boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", ...(shop.id === activeCardId ? activeCardStyle : {})}} >
             <CardMedia component="img" loading="lazy" alt={shop.name} height="200" image={shop.thumbnail || coffeePlaceholder} sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px", objectFit: shop.thumbnail ? "none":"contain"}}/>
             <CardContent sx={{ padding: ["8px 16px", "16px 24px"] }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
