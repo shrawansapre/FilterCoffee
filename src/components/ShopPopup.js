@@ -3,6 +3,7 @@ import React from "react";
 import { Typography, Button, Link } from "@mui/material";
 import { Popup } from "react-map-gl";
 import styled from "@emotion/styled";
+import StarIcon from "@mui/icons-material/Star";
 
 const PopupImage = styled.img`
   maxWidth: 100px;
@@ -29,7 +30,9 @@ const ShopPopup = ({ selectedShop, onClose }) => {
           Address: {selectedShop.address}
         </Typography>
     </div>
-    <div style={{ textAlign: 'center' }}>
+    {/* <div style={{ textAlign: 'center' }}> */}
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <StarIcon />
     <Button variant="contained" size="small" sx={{backgroundColor: "#f4a261",color: "#ffffff",}}>
       <Link href={selectedShop.google_maps_url} color="inherit" underline="none" target="_blank" rel="noopener noreferrer" aria-label="Visit shop">
         Visit
