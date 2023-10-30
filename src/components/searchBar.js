@@ -10,7 +10,7 @@ import Downshift from "downshift";
 import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
 const SearchBar = ({ onPlaceSelected }) => {
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const { updateUserLocation, userLocation } = useContext(CoffeeShopContext);
   const [places, setPlaces] = useState([]);
 
@@ -52,7 +52,7 @@ const SearchBar = ({ onPlaceSelected }) => {
             <TextField 
               {...getInputProps({
                 onChange: (e) => {
-                  setInputValue(e.target.value);
+                  // setInputValue(e.target.value);
                   fetchPlaces(e.target.value);
                 },
                 placeholder: "Enter Address",
