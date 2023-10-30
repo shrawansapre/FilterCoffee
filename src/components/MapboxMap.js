@@ -9,7 +9,7 @@ import ShopPopup from "./ShopPopup";
 import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
 
-const MapboxMap = () => {
+const MapboxMap = ({scrollToCard}) => {
   const { coffeeShops, loading, userLocation } = useContext(CoffeeShopContext);
   const [selectedShop, setSelectedShop] = useState(null);
   const [viewport, setViewport] = useState({
@@ -19,7 +19,7 @@ const MapboxMap = () => {
   });
 
   const customMarkers = useMemo(
-    () =>
+    (setSelectedShopIndex) =>
       coffeeShops.map((shop, index) => (
         <Marker
          key={`marker-${index}`}
@@ -31,6 +31,8 @@ const MapboxMap = () => {
             // with `closeOnClick: true
             e.originalEvent.stopPropagation();
             setSelectedShop(shop);
+            // const index = coffeeShops.findIndex(shop => shop.id === selectedShop.id);
+            // setSelectedShopIndex(index);
           }}
         >
           <CustomMarker details={shop} />
@@ -68,7 +70,7 @@ const MapboxMap = () => {
               {/* Shop Markers */}
               {customMarkers}
               {/* Shop Popups */}
-              {selectedShop && <ShopPopup selectedShop={selectedShop} onClose={() => setSelectedShop(false)}/>}
+              {selectedShop && <ShopPopup selectedShop={selectedShop} onClose={() => setSelectedShop(false)} scrollToCard={scrollToCard} />}
             </Map>
           )}
         </>
