@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import testCoffeeShopData from "../coffeeShops.json"
 
@@ -9,7 +9,7 @@ export const CoffeeShopProvider = ({ children }) => {
   const [coffeeShops, setCoffeeShops] = useState([testCoffeeShopData]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const baseURL = process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:3001/";
+ 
 
   const updateUserLocation = (newLocation) => {
     setUserLocation(newLocation);
@@ -25,6 +25,7 @@ export const CoffeeShopProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const baseURL = process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:3001/";
       setLoading(true)
       try {
         if (userLocation) {
