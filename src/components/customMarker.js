@@ -3,7 +3,7 @@ import coffeeIcon from "../assets/coffeeIcon.svg";
 
 function CustomMarker({details}) {
   return (
-    <div style={{ position: "relative", textAlign: "center" }}>
+    <div style={{ position: "relative", textAlign: "center", cursor:'pointer'}}>
       {/* Coffee Icon */}
       <img src={coffeeIcon} alt="Coffee marker" style={{ width: "24px", height: "24px" }}/>
       <div style={{position: "absolute", top: 0,left: "50%", transform: "translate(-50%, -100%)", backgroundColor: "#fff", borderRadius: "5px", paddingRight: "5px",display: "flex",alignItems: "center"}}>

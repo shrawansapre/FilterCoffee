@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Tab, Tabs, AppBar, Typography, Box, Grid } from "@mui/material";
 import MapIcon from '@mui/icons-material/Map';
 import ListIcon from '@mui/icons-material/List';
@@ -17,6 +17,29 @@ const Content = () => {
     const [selectedLatLng, setSelectedLatLng] = useState(null);
     const { updateUserLocation, errorMessage } = useContext(CoffeeShopContext);
     const isSmallScreen = useMediaQuery('(max-width:450px)');
+    const [scrollTarget, setScrollTarget] = useState(null);
+    const [activeCardId, setActiveCardId] = useState(null);
+    const cardRefs = useRef([]);
+
+    const scrollToCard = (index) => {
+        setSelectedTabIndex(1)
+        setScrollTarget(index);
+    };
+
+    useEffect(() => {
+        if (selectedTabIndex === 1 && scrollTarget !== null && cardRefs.current[scrollTarget]) {
+            console.log("Scrolling to ID:", scrollTarget);
+            cardRefs.current[scrollTarget].scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            setActiveCardId(scrollTarget);
+
+            // Reset scrollTarget after scroll is done
+            setScrollTarget(null);
+           
+        }
+    }, [selectedTabIndex, scrollTarget, cardRefs]);
 
     const handlePlaceSelected = (latLng) => {
         setIsSearchActivated(true);
@@ -26,6 +49,10 @@ const Content = () => {
     const handleChange = (event, newValue) => {
         setSelectedTabIndex(newValue);
     };
+
+    const resetActiveCard = () => {
+        setActiveCardId(null);
+    }
 
     useEffect(() => {
         // Attempt to get the user's current location
@@ -46,6 +73,7 @@ const Content = () => {
         } else {
             console.log('GeoLocation is not supported by this browser. Please try search.')
         }
+        // eslint-disable-next-line
     }, []);
     
     useEffect(() => {
@@ -90,10 +118,11 @@ const Content = () => {
                 <> 
                 {/* Map View */}
                 <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
-                    {selectedTabIndex === 0 && <MapboxMap/>}
+                {selectedTabIndex === 0 && <MapboxMap scrollToCard={scrollToCard} />}
                 </div>
+
                 {/* List View */}
-                {selectedTabIndex === 1 && <ListCards/>}
+                {selectedTabIndex === 1 && <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>}
                 </>
             )}
             </>)}
@@ -145,11 +174,11 @@ const Content = () => {
 
                     {/* Map View */}
                     <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
-                    {selectedTabIndex === 0 && <MapboxMap/>}
+                    {selectedTabIndex === 0 && <MapboxMap scrollToCard={scrollToCard} />}
                     </div>
 
                     {/* List View */}
-                    {selectedTabIndex === 1 && <ListCards/>}
+                    {selectedTabIndex === 1 && <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>}
                 </>
             )}
             </>)}
