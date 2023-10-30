@@ -87,9 +87,11 @@ const Content = () => {
             ):(<>
 
             {isSearchActivated && (
-                <>  
+                <> 
                 {/* Map View */}
-                {selectedTabIndex === 0 && <MapboxMap/>}
+                <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
+                    {selectedTabIndex === 0 && <MapboxMap/>}
+                </div>
                 {/* List View */}
                 {selectedTabIndex === 1 && <ListCards/>}
                 </>
@@ -127,6 +129,7 @@ const Content = () => {
             <>
             {isSearchActivated && (
                 <> 
+            
                     <div style={{ display: "flex",  justifyContent: 'center',marginTop: '20px'}}>
                         <div style ={{display: 'inline-flex'}}>
                             <AppBar position="static" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
@@ -141,7 +144,9 @@ const Content = () => {
                     </div>
 
                     {/* Map View */}
+                    <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
                     {selectedTabIndex === 0 && <MapboxMap/>}
+                    </div>
 
                     {/* List View */}
                     {selectedTabIndex === 1 && <ListCards/>}
