@@ -46,6 +46,7 @@ const Content = () => {
         } else {
             console.log('GeoLocation is not supported by this browser. Please try search.')
         }
+        // eslint-disable-next-line
     }, []);
     
     useEffect(() => {
