@@ -1,9 +1,8 @@
 // CoffeeShopPopup.js
 import React from "react";
-import { Typography, Button, Link } from "@mui/material";
+import { Typography} from "@mui/material";
 import { Popup } from "react-map-gl";
 import styled from "@emotion/styled";
-import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
 
 const PopupImage = styled.img`
