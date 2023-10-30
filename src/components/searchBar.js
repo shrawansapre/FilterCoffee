@@ -11,17 +11,24 @@ import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
 const SearchBar = ({ onPlaceSelected }) => {
   const [inputValue, setInputValue] = useState("");
-  const { updateUserLocation } = useContext(CoffeeShopContext);
+  const { updateUserLocation, userLocation } = useContext(CoffeeShopContext);
   const [places, setPlaces] = useState([]);
 
   const fetchPlaces = debounce(async (query) => {
-
     // TODO: Move the API call to back-end server
     // const response = await fetch(`http://localhost:3001/geocode?query=${query}`);
     // // setPlaces(response.data.features);
     // console.log(response.data)
 
-    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json`,{params:{access_token: process.env.REACT_APP_MAPBOX_TOKEN}});
+    const params = {
+      access_token: process.env.REACT_APP_MAPBOX_TOKEN,
+      country: 'us'
+    };
+    if (userLocation) {
+      params.proximity = String(userLocation.longitude)+","+String(userLocation.latitude);
+    }
+
+    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json`,{params});
     setPlaces(response.data.features)
     console.log("rendering Search");
     
