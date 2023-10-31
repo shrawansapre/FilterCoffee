@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Tab, Tabs, AppBar, Typography, Box, Grid } from "@mui/material";
+import { Tab, Tabs, AppBar, Typography, Box, Grid,Paper } from "@mui/material";
 import MapIcon from '@mui/icons-material/Map';
 import ListIcon from '@mui/icons-material/List';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,6 +17,8 @@ const Content = () => {
     const [selectedLatLng, setSelectedLatLng] = useState(null);
     const { updateUserLocation, errorMessage } = useContext(CoffeeShopContext);
     const isSmallScreen = useMediaQuery('(max-width:450px)');
+    const isDesktop = useMediaQuery('(min-width:600px)');
+    
     const [scrollTarget, setScrollTarget] = useState(null);
     const [activeCardId, setActiveCardId] = useState(null);
     const cardRefs = useRef([]);
@@ -117,19 +119,55 @@ const Content = () => {
             {isSearchActivated && (
                 <> 
                 {/* Map View */}
+                {selectedTabIndex === 0 &&
                 <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
-                {selectedTabIndex === 0 && <MapboxMap scrollToCard={scrollToCard} />}
-                </div>
+                     <MapboxMap scrollToCard={scrollToCard}/>
+                    </div>
+                }
 
                 {/* List View */}
-                {selectedTabIndex === 1 && <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>}
+                {selectedTabIndex === 1 &&
+                 <div style={{ marginTop: "20px", flex: '1 1 auto', overflowY: 'auto'}}>
+                 <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>
+                 </div>}
                 </>
             )}
             </>)}
         </>
-        ):(
+        ) 
+        :isDesktop ? (
         <>
-             {/* Desktop */}
+         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: isSearchActivated ? 'auto' : 'calc(90vh - 64px)', transition: 'top 1s ease-in-out' }}>
+                {!isSearchActivated && 
+                    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                        <img src="/favicon-32x32.png" alt="Coffee Brewing" style={{width: '300px'}} />
+                    </div>
+                }
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', width: '100%'}}>
+                    <Grid container justifyContent="center" sx={{textAlign:"center"}}>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <Typography variant="body1" sx={{ color: '#8B4513',  fontSize: {xs: '0.75rem',sm: '0.875rem',md: '1rem'}}}>Enable your location or</Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                            <SearchBar onPlaceSelected={handlePlaceSelected}/>
+                        </Grid>
+                    </Grid>
+                </Box> 
+            </div>
+            {isSearchActivated && 
+            <Grid container style={{marginTop:"20px", display:'flex', height:'100%', overflow:"hidden" }}>
+                <Grid item xs={8} md={8} lg={9} xl={9} style={{ height: '100%', overflow: 'hidden' }}>
+                    <MapboxMap scrollToCard={scrollToCard} />
+                </Grid>
+                <Grid item xs={4} md={4} lg={3} xl={3} style={{ height: '100%', overflowY: 'auto' }}>
+                    <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>
+                </Grid>
+            </Grid>
+            }
+        </>)
+        :(
+        <>
+            
              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: isSearchActivated ? 'auto' : 'calc(90vh - 64px)', transition: 'top 1s ease-in-out' }}>
                 {!isSearchActivated && 
                     <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -173,12 +211,21 @@ const Content = () => {
                     </div>
 
                     {/* Map View */}
-                    <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>
-                    {selectedTabIndex === 0 && <MapboxMap scrollToCard={scrollToCard} />}
+                   {selectedTabIndex === 0 && 
+                    <div style={{ paddingTop: "20px", flex: '1 1 auto', overflow: 'hidden' }}>    
+                    <MapboxMap scrollToCard={scrollToCard} />
                     </div>
+                    }
+                   
 
                     {/* List View */}
-                    {selectedTabIndex === 1 && <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>}
+                   
+                    {selectedTabIndex === 1 && 
+                     <div style={{ marginTop: "20px", flex: '1 1 auto', overflowY: 'auto'}}>
+                    <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>
+                    </div>}
+                
+                    
                 </>
             )}
             </>)}

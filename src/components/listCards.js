@@ -55,12 +55,12 @@ const ListCards = ({cardRefs, activeCardId, resetActiveCard}) => {
   }, [activeCardId, resetActiveCard]);
 
   return (
-  <div >
+  < >
     {loading ? <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
     : (
-    <Grid container spacing={{ xs: 2, md: 2, lg:3 }} style={{ padding: "30px"}}>
+    <Grid container spacing={{ xs: 2, md: 2, lg:3 }} style={{ paddingLeft: "30px", paddingRight: "30px"}}>
       {coffeeShops && coffeeShops.map((shop, index) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={shop.id} ref={el => cardRefs.current[shop.id] = el} >
+        <Grid item xs={12} sm={12} md={12} lg={12} key={shop.id} ref={el => cardRefs.current[shop.id] = el} >
           <Card key={index} sx={{maxWidth:'400px', maxHeight: '500px', margin: 'auto', borderRadius: "20px", boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", ...(shop.id === activeCardId ? activeCardStyle : {})}} >
             <CardMedia component="img" loading="lazy" alt={shop.name} height="200" image={shop.thumbnail || coffeePlaceholder} sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px", objectFit: shop.thumbnail ? "none":"contain"}}/>
             <CardContent sx={{ padding: ["8px 16px", "16px 24px"] }}>
@@ -105,7 +105,7 @@ const ListCards = ({cardRefs, activeCardId, resetActiveCard}) => {
       ))}
     </Grid>
     )}
-  </div>
+  </>
   );
 };
 
