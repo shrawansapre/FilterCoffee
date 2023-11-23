@@ -11,7 +11,7 @@ import SearchBar from './searchBar';
 import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
 const Content = () => {
-    console.log("rendering Content")
+    // console.log("rendering Content")
     const [isSearchActivated, setIsSearchActivated] = useState(null);
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);
     const [selectedLatLng, setSelectedLatLng] = useState(null);
@@ -30,7 +30,7 @@ const Content = () => {
 
     useEffect(() => {
         if (selectedTabIndex === 1 && scrollTarget !== null && cardRefs.current[scrollTarget]) {
-            console.log("Scrolling to ID:", scrollTarget);
+            // console.log("Scrolling to ID:", scrollTarget);
             cardRefs.current[scrollTarget].scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -156,10 +156,10 @@ const Content = () => {
             </div>
             {isSearchActivated && 
             <Grid container style={{marginTop:"20px", display:'flex', height:'100%', overflow:"hidden" }}>
-                <Grid item xs={8} md={8} lg={9} xl={9} style={{ height: '100%', overflow: 'hidden' }}>
+                <Grid item sm={7} md={8} lg={9} xl={9} style={{ height: '100%', overflow: 'hidden' }}>
                     <MapboxMap scrollToCard={scrollToCard} />
                 </Grid>
-                <Grid item xs={4} md={4} lg={3} xl={3} style={{ height: '100%', overflowY: 'auto' }}>
+                <Grid item sm={5} md={4} lg={3} xl={3} style={{ height: '100%', overflowY: 'auto' }}>
                     <ListCards cardRefs={cardRefs} activeCardId={activeCardId} resetActiveCard={resetActiveCard}/>
                 </Grid>
             </Grid>

@@ -43,7 +43,7 @@ const ListCards = ({cardRefs, activeCardId, resetActiveCard}) => {
   };
 
   useEffect(() => {
-    console.log(activeCardId)
+    // console.log(activeCardId)
     if (activeCardId !== null) {
       const timer = setTimeout(() => {
         resetActiveCard();
@@ -56,7 +56,7 @@ const ListCards = ({cardRefs, activeCardId, resetActiveCard}) => {
 
   return (
   < >
-    {loading ? <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> <LoadingAnimation /> </div>
+    {loading ? <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}> </div>
     : (
     <Grid container spacing={{ xs: 2, md: 2, lg:3 }} style={{ paddingLeft: "30px", paddingRight: "30px"}}>
       {coffeeShops && coffeeShops.map((shop, index) => (
