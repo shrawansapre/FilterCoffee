@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext, useEffect, useRef } from "react";
-import Map, { Marker, NavigationControl, FullscreenControl} from "react-map-gl";
+import Map, { Marker, NavigationControl, FullscreenControl, GeolocateControl} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import CustomMarker from "./customMarker";
@@ -70,9 +70,10 @@ const MapboxMap = ({scrollToCard}) => {
       {userLocation ? (
         <>
         
-            <Map reuseMaps {...viewState} style={{ width: "100%", height: "100%"  }} mapStyle="mapbox://styles/mapbox/streets-v10" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} onMove={onMove}>
+            <Map reuseMaps {...viewState} style={{ width: "100%", height: "100%"  }} mapStyle="mapbox://styles/mapbox/streets-v12" mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN} onMove={onMove}>
               <FullscreenControl position="top-left" />
               <NavigationControl position="top-left" />
+              <GeolocateControl position="top-left" positionOptions={{enableHighAccuracy: true}} trackUserLocation showUserHeading/>
 
               {/* User Marker */}
               <Marker longitude={userLocation.longitude} latitude={userLocation.latitude}/>

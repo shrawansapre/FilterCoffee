@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Tab, Tabs, AppBar, Typography, Box, Grid,Paper } from "@mui/material";
+import { Tab, Tabs, AppBar, Typography, Box, Grid } from "@mui/material";
 import MapIcon from '@mui/icons-material/Map';
 import ListIcon from '@mui/icons-material/List';
 import useMediaQuery from '@mui/material/useMediaQuery';

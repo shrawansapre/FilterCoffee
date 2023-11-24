@@ -12,7 +12,6 @@ import Rating from '@mui/material/Rating';
 import LanguageIcon from '@mui/icons-material/Language'
 
 import coffeePlaceholder from "../assets/coffee_thumbnail_placeholder.svg";
-import LoadingAnimation from "./loadingAnimation";
 
 import { CoffeeShopContext } from "../context/CoffeeShopContext";
 
