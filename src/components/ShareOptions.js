@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
 import { IconButton, Tooltip, Menu, MenuItem, Typography } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
+import SmsIcon from "@mui/icons-material/Sms";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -12,11 +14,11 @@ import {
   TelegramShareButton,
 } from "react-share";
 
-import MessageIcon from "@mui/icons-material/Message";
-
 const ShareOptions = ({ url, title }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const smsHref = `sms:?&body=${encodeURIComponent(title + " " + url)}`;
+  const iconSize = 24;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,11 +28,6 @@ const ShareOptions = ({ url, title }) => {
     setAnchorEl(null);
   };
 
-  const smsHref = `sms:?&body=${encodeURIComponent(title + " " + url)}`;
-
-  // size for the icons
-  const iconSize = 24;
-
   return (
     <div>
       <Tooltip title="Share">
@@ -38,66 +35,94 @@ const ShareOptions = ({ url, title }) => {
           <ShareIcon />
         </IconButton>
       </Tooltip>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}  getContentAnchorEl={null}>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        getContentAnchorEl={null}
+      >
         <MenuItem onClick={handleClose}>
-          <WhatsappShareButton url={url} title={title}>
+          <WhatsappShareButton
+            url={url}
+            title={title}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             <WhatsappIcon
               size={iconSize}
               round
               style={{ marginRight: "5px" }}
             />
+            <Typography key={url} variant="body2" color="text.secondary">
+              Whatsapp
+            </Typography>
           </WhatsappShareButton>
-          <Typography key={url} variant="body2" color="text.secondary">
-            Whatsapp
-          </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <IconButton
             component="a"
             href={smsHref}
             aria-label="share via sms"
-            style={{ marginRight: "5px", padding: 0 }}
+            sx={{
+              padding: 0,
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
           >
-            <MessageIcon size={iconSize} />
+            <SmsIcon size={iconSize} style={{ marginRight: "5px" }} />
+            <Typography variant="body2" color="text.secondary">
+              SMS
+            </Typography>
           </IconButton>
-          <Typography variant="body2" color="text.secondary">
-            SMS
-          </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <TelegramShareButton url={url} quote={title}>
+          <TelegramShareButton
+            url={url}
+            quote={title}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
             <TelegramIcon
               size={iconSize}
               round
               style={{ marginRight: "5px" }}
             />
+            <Typography key={url} variant="body2" color="text.secondary">
+              Telegram
+            </Typography>
           </TelegramShareButton>
-          <Typography key={url} variant="body2" color="text.secondary">
-            Telegram
-          </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <FacebookShareButton url={url} quote={title}>
+          <FacebookShareButton
+            url={url}
+            quote={title}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
             <FacebookIcon
               size={iconSize}
               round
               style={{ marginRight: "5px" }}
             />
+            <Typography key={url} variant="body2" color="text.secondary">
+              Facebook
+            </Typography>
           </FacebookShareButton>
-          <Typography key={url} variant="body2" color="text.secondary">
-            Facebook
-          </Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <TwitterShareButton url={url} title={title}>
+          <TwitterShareButton
+            url={url}
+            title={title}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
             <XIcon size={iconSize} round style={{ marginRight: "5px" }} />
+            <Typography key={url} variant="body2" color="text.secondary">
+              X (Twitter)
+            </Typography>
           </TwitterShareButton>
-          <Typography key={url} variant="body2" color="text.secondary">
-            {" "}
-            X (Twitter)
-          </Typography>
         </MenuItem>
-        {/* Add more sharing options here */}
       </Menu>
     </div>
   );
